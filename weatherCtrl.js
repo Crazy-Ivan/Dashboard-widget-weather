@@ -13,24 +13,24 @@ angular.module('widget')
             {city: 'Stockholm', 'url': 'http://api.openweathermap.org/data/2.5/weather?id=2673730&units=metric'},
         ]);
 
-        $scope.city = $scope.options.dataBind.source;
+        $scope.city = $scope.widget.options.dataBind.source;
 
         $scope.cities = cityCollection.all();
 
         $scope.$watch(function() {
-            return $scope.options.data.weather[0].icon;
+            return $scope.widget.data.weather[0].icon;
         }, function(newData) {
             if(newData.match(/^\d{2}d$/)) {
-                $scope.options.color = colors.day;
+                $scope.widget.options.color = colors.day;
             } else {
-                $scope.options.color = colors.night;
+                $scope.widget.options.color = colors.night;
             }
         });
 
         $scope.save = function() {
-            $scope.options.dataBind.source = $scope.city;
-            $scope.options.getData().then(function() {
-                $scope.options.flip = false;
+            $scope.widget.options.dataBind.source = $scope.city;
+            $scope.widget.getData().then(function() {
+                $scope.widget.flip();
             });
         };
     }]);
